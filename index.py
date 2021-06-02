@@ -35,6 +35,13 @@ class jsonListRequestHandler(tornado.web.RequestHandler):
         fh.close()
         self.write(json.dumps(fruits))
 
+    def post(self):
+        fh = open("list.txt", "a")
+        fruit = self.get_argument("fruit")
+        fh.write(f"\n{fruit}")
+        fh.close()
+        self.write(json.dumps({"message": "fruit added successfully."}))
+
 
 if __name__ == "__main__":
     app = tornado.web.Application(
