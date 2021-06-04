@@ -1,6 +1,10 @@
 import tornado.web
 import tornado.ioloop
+import tornado.options
+from tornado.options import define, options
 import json
+
+define("port", default=8080, help="run on the given port", type=int)
 
 
 class mainRequestHandler(tornado.web.RequestHandler):
@@ -54,7 +58,8 @@ if __name__ == "__main__":
         ]
     )
 
-    port = 8882
-    app.listen(port)
-    print(f"Application is ready and listening on port {port}")
+    # port = 8882
+    tornado.options.parse_command_line()
+    app.listen(options.port)
+    print(f"Application is ready and listening on port {options.port}")
     tornado.ioloop.IOLoop.current().start()
