@@ -3,9 +3,9 @@ import tornado.ioloop
 import json
 
 
-class basicRequestHandler(tornado.web.RequestHandler):
+class mainRequestHandler(tornado.web.RequestHandler):
     def get(self):
-        self.write("Hello World! This is a python command executed from the backend.")
+        self.render("index.html")
 
 
 class queryParamRequestHandler(tornado.web.RequestHandler):
@@ -46,7 +46,7 @@ class jsonListRequestHandler(tornado.web.RequestHandler):
 if __name__ == "__main__":
     app = tornado.web.Application(
         [
-            (r"/", basicRequestHandler),
+            (r"/", mainRequestHandler),
             (r"/animals", listRequestHandler),
             (r"/isEven", queryParamRequestHandler),
             (r"/students/([a-z]+)/([0-9]+)", resourceParamRequestHandler),
